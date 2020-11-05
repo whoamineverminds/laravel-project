@@ -19,7 +19,7 @@ class PlansController extends Controller
         $priority = (int)Helpers::getRequiredHttpParam($request,'priority');
         Helpers::clamp($priority, 1, 5);
 
-        $list->getPlans->create([
+        $list->getPlans()->create([
             'list_id' => $list->id,
             'title' => $title,
             'description' => $description,
@@ -36,7 +36,7 @@ class PlansController extends Controller
     public function deletePlan(Plans $plan)
     {
         if (!$plan->complete)
-            $plan->getList->decrement('undone');
+            $plan->getList()->decrement('undone');
 
         $plan->delete();
 
@@ -45,7 +45,7 @@ class PlansController extends Controller
 
     public function changePlan(Plans $plan, Request $request, Lists $newList = null)
     {
-        $foundList = $plan->getList;
+        $foundList = $plan->getList();
 
         $complete = $request->get('complete');
 
@@ -107,7 +107,7 @@ class PlansController extends Controller
     public function markPlanComplete(Plans $plan)
     {
         if (!$plan->complete) {
-            $plan->getList->decrement('undone');
+            $plan->getList()->decrement('undone');
 
             $plan->update(['complete' => true]);
         }

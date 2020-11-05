@@ -21,7 +21,7 @@ class Plans extends Model
     {
         static::created(function ($user) {
             if (!$user->complete) {
-                $user->getList->increment('undone');
+                $user->getList()->increment('undone');
             }
         });
     }

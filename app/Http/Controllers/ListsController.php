@@ -127,7 +127,7 @@ class ListsController extends Controller
         $count = (int)$request->get('count', 10);
         Helpers::clamp($count, 1, 100, 1, 10);
 
-        $plans = $list->getPlans->skip($offset)->take($count);
+        $plans = $list->getPlans()->skip($offset)->take($count);
 
         if ($type == self::GET_DONE_ONLY) {
             $plans->where('complete', '=', true);
