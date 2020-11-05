@@ -10,7 +10,7 @@ class Lists extends Model
     use HasFactory;
     const CREATED_AT = 'date_create';
     const UPDATED_AT = 'date_change';
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'undone'];
 
     public function getPlans()
     {

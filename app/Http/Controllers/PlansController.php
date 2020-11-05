@@ -27,17 +27,11 @@ class PlansController extends Controller
             'complete' => false
         ]);
 
-
-        $list->increment('undone');
-
-        return response()->json(null, 201);
+        return response()->json($list, 201);
     }
 
     public function deletePlan(Plans $plan)
     {
-        if (!$plan->complete)
-            $plan->getList()->decrement('undone');
-
         $plan->delete();
 
         return response()->json(null, 200);
@@ -45,7 +39,7 @@ class PlansController extends Controller
 
     public function changePlan(Plans $plan, Request $request, Lists $newList = null)
     {
-        $foundList = $plan->getList();
+        $foundList = $plan->getList;
 
         $complete = $request->get('complete');
 
@@ -56,16 +50,20 @@ class PlansController extends Controller
                 $complete = (bool)$complete;
 
                 if (!$plan->complete) {
-                    $foundList->decrement('undone');
+                    --$foundList->undone;
+                    $foundList->save();
                 }
 
                 if (!$complete) {
-                    $newList->increment('undone');
+                    ++$newList->undone;
+                    $newList->save();
                 }
             } elseif (!$plan->complete) { //Если план не был как-то отмечен
-                $foundList->decrement('undone');
+                --$foundList->undone;
+                $foundList->save();
 
-                $newList->increment('undone');
+                ++$newList->undone;
+                $newList->save();
             }
 
             $plan->list_id = $newList->id;
@@ -73,9 +71,11 @@ class PlansController extends Controller
             $complete = (bool)$complete;
 
             if (!$plan->complete && $complete) {
-                $foundList->decrement('undone');
+                --$foundList->undone;
+                $foundList->save();
             } elseif ($plan->complete && !$complete) {
-                $foundList->increment('undone');
+                ++$foundList->undone;
+                $foundList->save();
             }
         }
 
@@ -107,7 +107,9 @@ class PlansController extends Controller
     public function markPlanComplete(Plans $plan)
     {
         if (!$plan->complete) {
-            $plan->getList()->decrement('undone');
+            $founndList = $plan->getList;
+            --$founndList->undone;
+            $founndList->save();
 
             $plan->update(['complete' => true]);
         }

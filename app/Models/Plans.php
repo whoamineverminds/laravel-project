@@ -21,7 +21,17 @@ class Plans extends Model
     {
         static::created(function ($user) {
             if (!$user->complete) {
-                $user->getList()->increment('undone');
+                $foundList = $user->getList;
+                ++$foundList->undone;
+                $foundList->save();
+            }
+        });
+
+        static::deleted(function ($user) {
+            if (!$user->complete) {
+                $foundList = $user->getList;
+                --$foundList->undone;
+                $foundList->save();
             }
         });
     }
