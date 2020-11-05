@@ -127,6 +127,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -156,7 +157,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604575092172</updated>
-      <workItem from="1604575097957" duration="8866000" />
+      <workItem from="1604575097957" duration="9130000" />
     </task>
     <servers />
   </component>
