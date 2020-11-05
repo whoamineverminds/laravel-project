@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class IncorrectValueExceptionException extends Exception
+class IncorrectValueException extends Exception
 {
     /**
      * Render the exception as an HTTP response.
