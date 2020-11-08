@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="411a742a-01f9-403a-8b22-565b0f8c59d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/to_do_list/ToDoListsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/to_do_list/ToDoListsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/to_do_list/ToDoPlansController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/to_do_list/ToDoPlansController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/to_do_list/ListsService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/to_do_list/ListsService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/to_do_list/PlansService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/to_do_list/PlansService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +191,7 @@
       <workItem from="1604640614947" duration="6603000" />
       <workItem from="1604648822355" duration="7159000" />
       <workItem from="1604748752763" duration="3557000" />
-      <workItem from="1604752344061" duration="27181000" />
+      <workItem from="1604752344061" duration="27663000" />
     </task>
     <servers />
   </component>
