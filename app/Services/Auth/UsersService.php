@@ -36,6 +36,7 @@ class UsersService
     public function register($request)
     {
         try {
+            $request['password'] = Hash::make($request['password']);
             return [
                 'message' => User::create($request),
                 'code' => 201
