@@ -29,12 +29,12 @@ Route::group(['prefix' => 'to_do_list', 'middleware' => 'auth:sanctum'], functio
         Route::get('/get', [ToDoListsController::class, 'get']);
         Route::get('/sort', [ToDoListsController::class, 'sort']);
         Route::get('/filter', [ToDoListsController::class, 'filter']);
-        Route::get('/get_plans/{list}', [ToDoListsController::class, 'plans']);
     });
     Route::group(['prefix' => 'plans'], function() {
         Route::post('/create/{list}', [ToDoPlansController::class, 'create']);
         Route::delete('/delete/{plan}', [ToDoPlansController::class, 'delete']);
         Route::post('/change/{plan}/{newList?}', [ToDoPlansController::class, 'change']);
+        Route::get('/get/{list}', [ToDoListsController::class, 'plans']);
         Route::post('mark-complete/{plan}', [ToDoPlansController::class, 'markComplete']);
     });
 });

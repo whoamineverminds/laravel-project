@@ -31,9 +31,4 @@ class UsersController extends Controller
     {
         return self::response($this->usersService->change($request->validated(), $request->user()));
     }
-
-    private static function response($response)
-    {
-        return response()->json($response['message'], $response['code']);
-    }
 }
