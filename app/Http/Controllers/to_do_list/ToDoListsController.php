@@ -21,17 +21,17 @@ class ToDoListsController extends Controller
 
     public function create(CreateListRequest $request)
     {
-        return response()->json($this->listsService->create($request->validated()), 201);
+        return self::response($this->listsService->create($request->validated()));
     }
 
     public function delete(ToDoList $list)
     {
-        return response()->json($this->listsService->delete($list), 200);
+        return self::response($this->listsService->delete($list));
     }
 
     public function change(CreateListRequest $request, ToDoList $list)
     {
-        return response()->json($this->listsService->change($request->validated(), $list), 200);
+        return self::response($this->listsService->change($request->validated(), $list));
     }
 
     public function get(GetRequest $request)
@@ -40,21 +40,16 @@ class ToDoListsController extends Controller
         $result->map(function($result) {
             $result->count = $result->getPlans()->count();
         });
-        return response()->json($result, 200);
+        return self::response(['message' => $result, 'code' => 200]);
     }
 
     public function sort(SortListsRequest $request)
     {
-        return response()->json($this->listsService->sort($request->validated()), 200);
+        return self::response($this->listsService->sort($request->validated()));
     }
 
     public function filter(FilterListsRequest $request)
     {
-        return response()->json($this->listsService->filter($request->validated()), 200);
-    }
-
-    public function plans(ToDoList $list, GetRequest $request)
-    {
-        return response()->json($this->listsService->plans($request->validated(), $list), 200);
+        return self::response($this->listsService->filter($request->validated()));
     }
 }

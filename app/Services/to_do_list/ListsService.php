@@ -17,18 +17,28 @@ class ListsService
 
     public function create($request)
     {
-        return ToDoList::create($request);
+        return [
+            'message' => ToDoList::create($request),
+            'code' => 201
+        ];
     }
 
     public function delete(ToDoList $list)
     {
         $list->delete();
-        return null;
+
+        return [
+            'message' => null,
+            'code' => 200
+        ];
     }
 
     public function change($request, ToDoList $list)
     {
-        return $list->update($request);
+        return [
+            'message' => $list->update($request),
+            'code' => 200
+        ];
     }
 
     public function lists($request)
@@ -87,7 +97,10 @@ class ListsService
                 break;
         }
 
-        return $queryResult->get();
+        return [
+            'message' => $queryResult->get(),
+            'code' => 200
+        ];
     }
 
     public function filter($request)
@@ -102,39 +115,9 @@ class ListsService
             $queryResult->orWhere('title', '=', $request['title']);
         }
 
-        return $queryResult->get();
-    }
-
-    public function plans($request, $list)
-    {
-        $type = self::GET_ALL;
-        if (isset($request['type'])) {
-            $type = $request['type'];
-            Helpers::clamp($type, self::GET_ALL, self::GET_UNDONE_ONLY);
-        }
-
-        $offset = 0;
-        if (isset($request['offset'])) {
-            $offset = $request['offset'];
-            if ($offset < 0) {
-                $offset = 0;
-            }
-        }
-
-        $count = 10;
-        if (isset($request['count'])) {
-            $count = $request['count'];
-            Helpers::clamp($count, 1, 100, 1, 10);
-        }
-
-        $queryResult = $list->getPlans->skip($offset)->take($count);
-
-        if ($type == self::GET_DONE_ONLY) {
-            $queryResult->where('complete', '=', true);
-        } elseif ($type == self::GET_UNDONE_ONLY) {
-            $queryResult->where('complete', '=', false);
-        }
-
-        return $queryResult;
+        return [
+            'message' => $queryResult->get(),
+            'code' => 200
+        ];
     }
 }

@@ -8,17 +8,26 @@ use App\Models\to_do_list\ToDoPlan;
 
 class PlansService
 {
+    const GET_ALL = 0;
+    const GET_COMPLETE_ONLY = 1;
+    const GET_INCOMPLETE_ONLY = 2;
+
     public function create($request, ToDoList $list)
     {
-        $result = array_merge(['list_id' => $list->id], $request);
-        $list->getPlans()->create($result);
-        return $result;
+        return [
+            'message' => $list->getPlans()->create(array_merge(['list_id' => $list->id], $request)),
+            'code' => 201
+        ];
     }
 
     public function delete(ToDoPlan $plan)
     {
         $plan->delete();
-        return null;
+
+        return [
+            'message' => null,
+            'code' => 200
+        ];
     }
 
     public function change($request, ToDoPlan $plan, ToDoList $newList)
@@ -84,6 +93,44 @@ class PlansService
             $plan->priority = $priority;
         }
 
-        return $plan->save();
+        $plan->save();
+
+        return [
+            'message' => $plan,
+            'code' => 200
+        ];
+    }
+
+    public function plans($request, $list)
+    {
+        $type = self::GET_ALL;
+        if (isset($request['type'])) {
+            $type = $request['type'];
+            Helpers::clamp($type, self::GET_ALL, self::GET_INCOMPLETE_ONLY);
+        }
+
+        $offset = 0;
+        if (isset($request['offset'])) {
+            $offset = $request['offset'];
+            if ($offset < 0) {
+                $offset = 0;
+            }
+        }
+
+        $count = 10;
+        if (isset($request['count'])) {
+            $count = $request['count'];
+            Helpers::clamp($count, 1, 100, 1, 10);
+        }
+
+        $queryResult = $list->getPlans->skip($offset)->take($count);
+
+        if ($type == self::GET_COMPLETE_ONLY) {
+            $queryResult->where('complete', '=', true);
+        } elseif ($type == self::GET_INCOMPLETE_ONLY) {
+            $queryResult->where('complete', '=', false);
+        }
+
+        return $queryResult;
     }
 }

@@ -34,7 +34,7 @@ Route::group(['prefix' => 'to_do_list', 'middleware' => 'auth:sanctum'], functio
         Route::post('/create/{list}', [ToDoPlansController::class, 'create']);
         Route::delete('/delete/{plan}', [ToDoPlansController::class, 'delete']);
         Route::post('/change/{plan}/{newList?}', [ToDoPlansController::class, 'change']);
-        Route::get('/get/{list}', [ToDoListsController::class, 'plans']);
+        Route::get('/get/{list}', [ToDoPlansController::class, 'get']);
         Route::post('mark-complete/{plan}', [ToDoPlansController::class, 'markComplete']);
     });
 });
