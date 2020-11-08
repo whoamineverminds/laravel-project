@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\to_do_list;
 
-use App\Models\Plans;
+use App\Models\to_do_list\ToDoPlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PlansFactory extends Factory
+class ToDoPlanFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Plans::class;
+    protected $model = ToDoPlan::class;
 
     /**
      * Define the model's default state.

@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\UsersController;
+use App\Http\Controllers\to_do_list\ToDoListsController;
+use App\Http\Controllers\to_do_list\ToDoPlansController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ListsController;
-use App\Http\Controllers\PlansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +21,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/CreateList', [ListsController::class, 'createList']);
-Route::delete('/DeleteList/{list}', [ListsController::class, 'deleteList']);
-Route::post('/ChangeList/{list}', [ListsController::class, 'changeList']);
-Route::get('/SortLists', [ListsController::class, 'sortLists']);
-Route::get('/FilterLists', [ListsController::class, 'filterLists']);
-Route::get('/GetLists', [ListsController::class, 'getLists']);
-Route::get('/GetPlans/{list}', [ListsController::class, 'getPlans']);
+Route::group(['prefix' => 'to_do_list', 'middleware' => 'auth:sanctum'], function() {
+    Route::group(['prefix' => 'lists'], function() {
+        Route::post('/create', [ToDoListsController::class, 'create']);
+        Route::delete('/delete/{list}', [ToDoListsController::class, 'delete']);
+        Route::post('/change/{list}', [ToDoListsController::class, 'change']);
+        Route::get('/get', [ToDoListsController::class, 'get']);
+        Route::get('/sort', [ToDoListsController::class, 'sort']);
+        Route::get('/filter', [ToDoListsController::class, 'filter']);
+        Route::get('/get_plans/{list}', [ToDoListsController::class, 'plans']);
+    });
+    Route::group(['prefix' => 'plans'], function() {
+        Route::post('/create/{list}', [ToDoPlansController::class, 'create']);
+        Route::delete('/delete/{plan}', [ToDoPlansController::class, 'delete']);
+        Route::post('/change/{plan}/{newList?}', [ToDoPlansController::class, 'change']);
+        Route::post('mark-complete/{plan}', [ToDoPlansController::class, 'markComplete']);
+    });
+});
 
-Route::post('/CreatePlan/{list}', [PlansController::class, 'createPlan']);
-Route::delete('/DeletePlan/{plan}', [PlansController::class, 'deletePlan']);
-Route::post('/ChangePlan/{plan}/{newList?}', [PlansController::class, 'changePlan']);
-Route::post('MarkPlanComplete/{plan}', [PlansController::class, 'markPlanComplete']);
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('/login', [UsersController::class, 'login']);
+    Route::post('/register', [UsersController::class, 'register']);
+    Route::group(['middleware' => 'auth:sanctum'], function() {
+        Route::post('/change', [UsersController::class, 'change']);
+    });
+});

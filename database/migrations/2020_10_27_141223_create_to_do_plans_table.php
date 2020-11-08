@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlansTable extends Migration
+class CreateToDoPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('to_do_plans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('list_id', false, true);
             $table->foreign('list_id')
                 ->references('id')
-                ->on('lists')
+                ->on('to_do_lists')
                 ->onDelete('cascade');;
-            $table->char('title', 32);
+            $table->string('title', 32);
             $table->text('description')->nullable();
             $table->smallInteger('priority', false, true);
-            $table->boolean('complete');
-            $table->timestamp('date_create')->nullable();
-            $table->timestamp('date_change')->nullable();
+            $table->boolean('complete')->default(false);
+            $table->timestamps();
         });
     }
 

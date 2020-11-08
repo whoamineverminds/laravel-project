@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Lists;
+use Database\Seeders\Auth\UsersTableSeeder;
+use Database\Seeders\to_do_list\ListsTableSeeder;
+use Database\Seeders\to_do_list\PlansTableSeeder;
 use Illuminate\Database\Seeder;
-use App\Models\Plans;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        Lists::factory(10)->create();
-        Plans::factory(100)->create();
+        $this->call(ListsTableSeeder::class);
+        $this->call(PlansTableSeeder::class);
     }
 }

@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\to_do_list;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Plans extends Model
+class ToDoPlan extends Model
 {
     use HasFactory;
-    const CREATED_AT = 'date_create';
-    const UPDATED_AT = 'date_change';
-    protected $fillable = ['title', 'description', 'priority', 'complete'];
+
+    protected $fillable = [
+        'title',
+        'description',
+        'priority',
+        'complete'
+    ];
 
     public function getList()
     {
-        return $this->belongsTo('App\Models\Lists', 'list_id');
+        return $this->belongsTo('App\Models\to_do_list\ToDoList', 'list_id');
     }
 
     protected static function booted()
