@@ -21,22 +21,22 @@ class ToDoPlansController extends Controller
 
     public function create(CreatePlanRequest $request, ToDoList $list)
     {
-        self::response($this->plansService->create($request->validated(), $list));
+        return self::response($this->plansService->create($request->validated(), $list));
     }
 
     public function delete(ToDoPlan $plan)
     {
-        self::response($this->plansService->delete($plan->validated()));
+        return self::response($this->plansService->delete($plan->validated()));
     }
 
     public function change(Request $request, ToDoPlan $plan, ToDoList $newList = null)
     {
-        self::response($this->plansService->change($request, $plan, $newList));
+        return self::response($this->plansService->change($request, $plan, $newList));
     }
 
     public function get(GetRequest $request, ToDoList $list)
     {
-        self::response([
+        return self::response([
             'message' => $this->plansService->plans($request->validated(), $list)->get(),
             'code' => 200
         ]);
@@ -44,6 +44,6 @@ class ToDoPlansController extends Controller
 
     public function markComplete(ToDoPlan $plan)
     {
-        self::response($this->plansService->change(['complete' => true], $plan, null));
+        return self::response($this->plansService->change(['complete' => true], $plan, null));
     }
 }
