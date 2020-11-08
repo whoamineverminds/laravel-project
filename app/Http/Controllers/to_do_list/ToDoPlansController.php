@@ -37,7 +37,7 @@ class ToDoPlansController extends Controller
     public function get(GetRequest $request, ToDoList $list)
     {
         self::response([
-            'message' => $this->plansService->plans($request->validated(), $list),
+            'message' => $this->plansService->plans($request->validated(), $list)->get(),
             'code' => 200
         ]);
     }
