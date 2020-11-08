@@ -101,7 +101,7 @@ class PlansService
         ];
     }
 
-    public function plans($request, $list)
+    public function plans($request, ToDoList $list)
     {
         $type = self::GET_ALL;
         if (isset($request['type'])) {
@@ -123,7 +123,7 @@ class PlansService
             Helpers::clamp($count, 1, 100, 1, 10);
         }
 
-        $queryResult = $list->getPlans->skip($offset)->take($count);
+        $queryResult = $list->getPlans()->skip($offset)->take($count);
 
         if ($type == self::GET_COMPLETE_ONLY) {
             $queryResult->where('complete', '=', true);
