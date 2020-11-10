@@ -4,8 +4,6 @@ namespace Database\Factories\Auth;
 
 use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -27,8 +25,8 @@ class UserFactory extends Factory
             'username' => $this->faker->userName,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => Hash::make($this->faker->password(8, 32)), // password
-            'remember_token' => Str::random(10),
+            'password' => \Hash::make($this->faker->password(8, 32)), // password
+            'remember_token' => \Str::random(10),
         ];
     }
 }

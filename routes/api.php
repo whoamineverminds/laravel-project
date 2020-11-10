@@ -4,7 +4,6 @@ use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\Exceptions\CatchExceptionsController;
 use App\Http\Controllers\to_do_list\ToDoListsController;
 use App\Http\Controllers\to_do_list\ToDoPlansController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +22,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('/user', [UsersController::class, 'get']);
         Route::post('/change', [UsersController::class, 'change']);
-        Route::group(['prefix' => 'verify'], function() {
+        Route::group(['prefix' => 'verify', 'middleware' => 'unverified'], function() {
             Route::post('/{id}/{hash}', [UsersController::class, 'verify'])
                 ->name('verification.verify');
             Route::post('/resend', [UsersController::class, 'verifyReSend']);
@@ -55,5 +54,7 @@ Route::group(['prefix' => 'exceptions'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('/EmailIsNotVerificated', [CatchExceptionsController::class, 'catchException'])
             ->name('verification.notice');
+        Route::get('/EmailIsVerificated', [CatchExceptionsController::class, 'catchException'])
+            ->name('unverification.notice');
     });
 });

@@ -5,8 +5,6 @@ namespace App\Services\Auth;
 use App\Models\Auth\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UsersService
 {
@@ -14,7 +12,7 @@ class UsersService
     {
         $user = User::where('username', '=', $request['username'])->first();
         if (isset($user)) {
-            if (Hash::check($request['password'], $user->password)) {
+            if (\Hash::check($request['password'], $user->password)) {
                 return [
                     'message' => array_merge(
                         $user->toarray(),
@@ -38,7 +36,7 @@ class UsersService
     public function register($request)
     {
         try {
-            $request['password'] = Hash::make($request['password']);
+            $request['password'] = \Hash::make($request['password']);
             $user = User::create($request);
             event(new Registered($user));
             return [
@@ -62,7 +60,7 @@ class UsersService
         }
 
         if (isset($request['password'])) {
-            $user->password = Hash::make($request['password']);
+            $user->password = \Hash::make($request['password']);
         }
 
         $user->save();
@@ -73,10 +71,10 @@ class UsersService
         ];
     }
 
-    public function get(Request $request)
+    public function get()
     {
         return [
-            'message' => $request->user(),
+            'message' => \Auth::user(),
             'code' => 200
         ];
     }
@@ -89,9 +87,9 @@ class UsersService
         ];
     }
 
-    public function verifyReSend(Request $request)
+    public function verifyReSend()
     {
-        $request->user()->sendEmailVerificationNotification();
+        \Auth::user()->sendEmailVerificationNotification();
 
         return [
             'message' => 'Verification email has been sent on your email',
