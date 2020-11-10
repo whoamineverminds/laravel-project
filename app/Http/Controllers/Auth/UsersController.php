@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\ChangeRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\Auth\UsersService;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -27,8 +29,24 @@ class UsersController extends Controller
         return self::response($this->usersService->register($request->validated()));
     }
 
+    public function get(Request $request)
+    {
+        return self::response($this->usersService->get($request));
+    }
+
     public function change(ChangeRequest $request)
     {
         return self::response($this->usersService->change($request->validated(), $request->user()));
+    }
+
+    public function verify(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+        return self::response($this->usersService->verify());
+    }
+
+    public function verifyReSend(Request $request)
+    {
+        return self::response($this->usersService->verifyReSend($request));
     }
 }

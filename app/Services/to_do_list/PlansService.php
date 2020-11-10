@@ -39,8 +39,7 @@ class PlansService
             $complete = $request['complete'];
         }
 
-        //Если лист план привязывается к новому листу
-        if (isset($newList))
+        if (isset($newList)) //Если лист план привязывается к новому листу
         {
             if (isset($complete)) {
                 $complete = (bool)$complete;

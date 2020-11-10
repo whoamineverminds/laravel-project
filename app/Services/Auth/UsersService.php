@@ -3,7 +3,9 @@
 namespace App\Services\Auth;
 
 use App\Models\Auth\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UsersService
@@ -37,8 +39,10 @@ class UsersService
     {
         try {
             $request['password'] = Hash::make($request['password']);
+            $user = User::create($request);
+            event(new Registered($user));
             return [
-                'message' => User::create($request),
+                'message' => $user,
                 'code' => 201
             ];
         } catch (QueryException $exception) {
@@ -53,16 +57,44 @@ class UsersService
     {
         if (isset($request['email'])) {
             $user->email = $request['email'];
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
         }
 
         if (isset($request['password'])) {
-            $user->password = $request['password'];
+            $user->password = Hash::make($request['password']);
         }
 
         $user->save();
 
         return [
             'message' => $user,
+            'code' => 200
+        ];
+    }
+
+    public function get(Request $request)
+    {
+        return [
+            'message' => $request->user(),
+            'code' => 200
+        ];
+    }
+
+    public function verify()
+    {
+        return [
+            'message' => 'Verification is successful complete',
+            'code' => 200
+        ];
+    }
+
+    public function verifyReSend(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return [
+            'message' => 'Verification email has been sent on your email',
             'code' => 200
         ];
     }
