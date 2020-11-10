@@ -96,7 +96,7 @@ class PlansService
         $plan->save();
 
         return [
-            'message' => $plan,
+            'message' => $plan->unsetRelation('getList'),
             'code' => 200
         ];
     }
