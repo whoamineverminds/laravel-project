@@ -30,7 +30,7 @@ class PlansService
         ];
     }
 
-    public function change($request, ToDoPlan $plan, ToDoList $newList)
+    public function change($request, ToDoPlan $plan, ToDoList $newList = null)
     {
         $foundList = $plan->getList;
 

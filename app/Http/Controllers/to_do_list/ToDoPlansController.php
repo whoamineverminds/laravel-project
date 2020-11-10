@@ -26,7 +26,7 @@ class ToDoPlansController extends Controller
 
     public function delete(ToDoPlan $plan)
     {
-        return self::response($this->plansService->delete($plan->validated()));
+        return self::response($this->plansService->delete($plan));
     }
 
     public function change(Request $request, ToDoPlan $plan, ToDoList $newList = null)
@@ -44,6 +44,6 @@ class ToDoPlansController extends Controller
 
     public function markComplete(ToDoPlan $plan)
     {
-        return self::response($this->plansService->change(['complete' => true], $plan, null));
+        return self::response($this->plansService->change(['complete' => true], $plan));
     }
 }
