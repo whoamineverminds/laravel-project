@@ -40,7 +40,9 @@ class UsersService
             $user = User::create($request);
             event(new Registered($user));
             return [
-                'message' => $user,
+                'message' => array_merge(
+                    $user->toarray(),
+                    ['token' => $user->createToken($request['username'])->plainTextToken]),
                 'code' => 201
             ];
         } catch (QueryException $exception) {

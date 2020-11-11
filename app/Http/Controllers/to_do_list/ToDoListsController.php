@@ -21,16 +21,22 @@ class ToDoListsController extends Controller
 
     public function create(CreateListRequest $request)
     {
+        $this->authorize('create', ToDoList::class);
+
         return self::response($this->listsService->create($request->validated()));
     }
 
     public function delete(ToDoList $list)
     {
+        $this->authorize('actions', $list);
+
         return self::response($this->listsService->delete($list));
     }
 
     public function change(CreateListRequest $request, ToDoList $list)
     {
+        $this->authorize('actions', $list);
+
         return self::response($this->listsService->change($request->validated(), $list));
     }
 

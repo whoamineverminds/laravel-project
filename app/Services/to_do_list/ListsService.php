@@ -63,7 +63,7 @@ class ListsService
             Helpers::clamp($count, 1, 100, 1, 10);
         }
 
-        $queryResult = ToDoList::skip($offset)->take($count);
+        $queryResult = ToDoList::skip($offset)->take($count)->where('user_id', '=', \Auth::user()->id);
 
         if ($type == self::GET_DONE_ONLY) {
             $queryResult->where('undone', '=', 0);

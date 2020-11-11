@@ -14,6 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\to_do_list\ToDoList' => 'App\Policies\to_do_list\ToDoListPolicy',
+        'App\Models\to_do_list\ToDoPlan' => 'App\Policies\to_do_list\ToDoPlanPolicy',
     ];
 
     /**
@@ -25,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('list-owner', function ($user, $list) {
+            return $user->id === $list->user_id;
+        });
     }
 }

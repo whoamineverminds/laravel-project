@@ -32,7 +32,7 @@ class PlansService
 
     public function change($request, ToDoPlan $plan, ToDoList $newList = null)
     {
-        $foundList = $plan->getList;
+        $foundList = $plan->getList()->first();
 
         $complete = null;
         if (isset($request['complete'])) {
@@ -122,7 +122,7 @@ class PlansService
             Helpers::clamp($count, 1, 100, 1, 10);
         }
 
-        $queryResult = $list->getPlans->skip($offset)->take($count);
+        $queryResult = $list->getPlans()->skip($offset)->take($count);
 
         if ($type == self::GET_COMPLETE_ONLY) {
             $queryResult->where('complete', '=', true);
@@ -130,6 +130,6 @@ class PlansService
             $queryResult->where('complete', '=', false);
         }
 
-        return $queryResult;
+        return $queryResult->get();
     }
 }
