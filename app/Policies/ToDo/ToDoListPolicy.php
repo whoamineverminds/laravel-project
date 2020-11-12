@@ -29,6 +29,6 @@ class ToDoListPolicy
      */
     public function actions(User $user, ToDoList $list)
     {
-        return $user === $list->getUser();
+        return $user->id === $list->getUser()->first()->id;
     }
 }

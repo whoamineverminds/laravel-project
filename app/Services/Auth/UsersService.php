@@ -76,7 +76,7 @@ class UsersService
     public function get()
     {
         return [
-            'message' => \Auth::user(),
+            'message' => auth()->user(),
             'code' => 200
         ];
     }
@@ -91,7 +91,7 @@ class UsersService
 
     public function verifyReSend()
     {
-        \Auth::user()->sendEmailVerificationNotification();
+        auth()->user()->sendEmailVerificationNotification();
 
         return [
             'message' => 'Verification email has been sent on your email',

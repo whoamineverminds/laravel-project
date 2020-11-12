@@ -20,7 +20,7 @@ class ToDoListsService
         return [
             'message' => ToDoList::create(array_merge(
                 $request,
-                ['user_id' => \Auth::user()->id]
+                ['user_id' => auth()->user()->id]
             )),
             'code' => 201
         ];
@@ -66,7 +66,10 @@ class ToDoListsService
             Helpers::clamp($count, 1, 100, 1, 10);
         }
 
-        $queryResult = ToDoList::skip($offset)->take($count)->where('user_id', '=', \Auth::user()->id);
+        $queryResult = auth()->user()->getLists()
+            ->skip($offset)
+            ->take($count)
+            ->where('user_id', '=', auth()->user()->id);
 
         if ($type == self::GET_DONE_ONLY) {
             $queryResult->where('undone', '=', 0);

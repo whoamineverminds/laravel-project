@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Auth\User;
+use App\Models\ToDo\ToDoList;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -27,8 +29,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('list-owner', function ($user, $list) {
-            return $user->id === $list->user_id;
+        Gate::define('list-owner', function (User $user, ToDoList $list) {
+            return $user->id === $list->getUser()->first()->id;
         });
     }
 }

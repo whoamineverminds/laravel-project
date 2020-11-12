@@ -14,6 +14,11 @@ class ToDoList extends Model
         'undone'
     ];
 
+    public function getUser()
+    {
+        return $this->belongsTo('App\Models\Auth\User', 'user_id');
+    }
+
     public function getPlans()
     {
         return $this->hasMany('App\Models\ToDo\ToDoPlan', 'list_id');
