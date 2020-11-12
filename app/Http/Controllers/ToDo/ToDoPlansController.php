@@ -8,6 +8,7 @@ use App\Models\ToDo\ToDoList;
 use App\Models\ToDo\ToDoPlan;
 use App\Http\Requests\ToDo\CreatePlanRequest;
 use App\Services\ToDo\ToDoPlansService;
+use Illuminate\Http\Request;
 
 class ToDoPlansController extends Controller
 {
@@ -32,14 +33,14 @@ class ToDoPlansController extends Controller
         return self::response($this->plansService->delete($plan));
     }
 
-    public function change(\Request $request, ToDoPlan $plan, ToDoList $newList = null)
+    public function change(Request $request, ToDoPlan $plan, ToDoList $newList = null)
     {
         $this->authorize('actions', $plan);
         if (isset($newList)) {
             \Gate::authorize('list-owner', $newList);
         }
 
-        return self::response($this->plansService->change($request, $plan, $newList));
+        return self::response($this->plansService->change($request->all(), $plan, $newList));
     }
 
     public function get(GetRequest $request, ToDoList $list)

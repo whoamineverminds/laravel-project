@@ -31,7 +31,7 @@ class ToDoPlansService
             ];
         } catch (\Exception $e) {
             return [
-                'message' => "Plan hasn't been deleted",
+                'message' => null,
                 'code' => 304
             ];
         }
@@ -104,13 +104,13 @@ class ToDoPlansService
             });
 
             return [
-                'message' => "Plan hasn't been changed",
-                'code' => 304
+                'message' => $plan->unsetRelation('getList'),
+                'code' => 200
             ];
         } catch (\Throwable $e) {
             return [
-                'message' => $plan->unsetRelation('getList'),
-                'code' => 200
+                'message' => null,
+                'code' => 304
             ];
         }
     }
