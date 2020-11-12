@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\to_do_list;
+namespace App\Http\Requests\ToDo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetRequest extends FormRequest
+class CreatePlanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class GetRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'integer',
-            'offset' => 'integer',
-            'count' => 'integer'
+            'title' => 'required|max:32',
+            'description' => 'max:256',
+            'priority' => 'required|integer|min:1|max:5'
         ];
     }
 }

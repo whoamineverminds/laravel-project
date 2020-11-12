@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\to_do_list;
+namespace App\Http\Requests\ToDo;
 
 use Illuminate\Foundation\Http\FormRequest;
 

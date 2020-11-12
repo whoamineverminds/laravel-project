@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\to_do_list;
+namespace App\Models\ToDo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

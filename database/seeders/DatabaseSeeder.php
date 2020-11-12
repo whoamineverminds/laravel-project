@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Auth\UsersTableSeeder;
-use Database\Seeders\to_do_list\ListsTableSeeder;
-use Database\Seeders\to_do_list\PlansTableSeeder;
+use Database\Seeders\ToDo\ListsTableSeeder;
+use Database\Seeders\ToDo\PlansTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

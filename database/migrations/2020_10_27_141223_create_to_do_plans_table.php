@@ -14,7 +14,7 @@ class CreateToDoPlansTable extends Migration
     {
         Schema::create('to_do_plans', function (Blueprint $table) {
             $table->id('id');
-            $table->bigInteger('list_id', false, true);
+            $table->foreignId('list_id');
             $table->foreign('list_id')
                 ->references('id')
                 ->on('to_do_lists')
@@ -34,6 +34,6 @@ class CreateToDoPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('to_do_plans');
     }
 }

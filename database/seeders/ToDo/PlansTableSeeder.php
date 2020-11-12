@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders\to_do_list;
+namespace Database\Seeders\ToDo;
 
-use App\Models\to_do_list\ToDoList;
+use App\Models\ToDo\ToDoPlan;
 use Illuminate\Database\Seeder;
 
-class ListsTableSeeder extends Seeder
+class PlansTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class ListsTableSeeder extends Seeder
      */
     public function run()
     {
-        ToDoList::factory(10)->create();
+        ToDoPlan::factory(100)->create();
     }
 }

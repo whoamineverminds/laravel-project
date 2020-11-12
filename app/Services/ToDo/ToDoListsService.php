@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\to_do_list;
+namespace App\Services\ToDo;
 
 use App\Helpers\Helpers;
-use App\Models\to_do_list\ToDoList;
+use App\Models\ToDo\ToDoList;
 
-class ListsService
+class ToDoListsService
 {
     const GET_ALL = 0;
     const GET_DONE_ONLY = 1;
@@ -15,10 +15,13 @@ class ListsService
     const SORT_BY_CHANGING = 1;
     const SORT_BY_TITLE = 2;
 
-    public function create($request)
+    public function create(array $request)
     {
         return [
-            'message' => ToDoList::create($request),
+            'message' => ToDoList::create(array_merge(
+                $request,
+                ['user_id' => \Auth::user()->id]
+            )),
             'code' => 201
         ];
     }
@@ -33,7 +36,7 @@ class ListsService
         ];
     }
 
-    public function change($request, ToDoList $list)
+    public function change(array $request, ToDoList $list)
     {
         return [
             'message' => $list->update($request),
@@ -41,7 +44,7 @@ class ListsService
         ];
     }
 
-    public function lists($request)
+    public function lists(array $request)
     {
         $type = self::GET_ALL;
         if (isset($request['type'])) {
@@ -74,7 +77,7 @@ class ListsService
         return $queryResult;
     }
 
-    public function sort($request)
+    public function sort(array $request)
     {
         $type = 0;
         if (isset($request['type'])) {
@@ -103,7 +106,7 @@ class ListsService
         ];
     }
 
-    public function filter($request)
+    public function filter(array $request)
     {
         $queryResult = $this->lists(array_merge($request, ['type' => self::GET_ALL]));
 

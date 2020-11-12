@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Policies\to_do_list;
+namespace App\Policies\ToDo;
 
 use App\Models\Auth\User;
-use App\Models\to_do_list\ToDoPlan;
+use App\Models\ToDo\ToDoPlan;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ToDoPlanPolicy

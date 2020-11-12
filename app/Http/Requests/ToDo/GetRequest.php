@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\to_do_list;
+namespace App\Http\Requests\ToDo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterListsRequest extends FormRequest
+class GetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class FilterListsRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'date',
-            'title' => 'max:32',
+            'type' => 'integer',
             'offset' => 'integer',
             'count' => 'integer'
         ];

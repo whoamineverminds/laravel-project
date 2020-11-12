@@ -14,8 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        'App\Models\to_do_list\ToDoList' => 'App\Policies\to_do_list\ToDoListPolicy',
-        'App\Models\to_do_list\ToDoPlan' => 'App\Policies\to_do_list\ToDoPlanPolicy',
+        'App\Models\ToDo\ToDoList' => 'App\Policies\ToDo\ToDoListPolicy',
+        'App\Models\ToDo\ToDoPlan' => 'App\Policies\ToDo\ToDoPlanPolicy',
     ];
 
     /**

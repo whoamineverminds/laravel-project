@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\Exceptions\CatchExceptionsController;
-use App\Http\Controllers\to_do_list\ToDoListsController;
-use App\Http\Controllers\to_do_list\ToDoPlansController;
+use App\Http\Controllers\ToDo\ToDoListsController;
+use App\Http\Controllers\ToDo\ToDoPlansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function() {
     });
 });
 
-Route::group(['prefix' => 'to_do_list', 'middleware' => ['auth:sanctum', 'verified']], function() {
+Route::group(['prefix' => 'todo', 'middleware' => ['auth:sanctum', 'verified']], function() {
     Route::group(['prefix' => 'lists'], function() {
         Route::post('/create', [ToDoListsController::class, 'create']);
         Route::delete('/delete/{list}', [ToDoListsController::class, 'delete']);

@@ -8,7 +8,7 @@ use Illuminate\Database\QueryException;
 
 class UsersService
 {
-    public function login($request)
+    public function login(array $request)
     {
         $user = User::where('username', '=', $request['username'])->first();
         if (isset($user)) {
@@ -33,7 +33,7 @@ class UsersService
         ];
     }
 
-    public function register($request)
+    public function register(array $request)
     {
         try {
             $request['password'] = \Hash::make($request['password']);
@@ -53,7 +53,7 @@ class UsersService
         }
     }
 
-    public function change($request, User $user)
+    public function change(array $request, User $user)
     {
         if (isset($request['email'])) {
             $user->email = $request['email'];

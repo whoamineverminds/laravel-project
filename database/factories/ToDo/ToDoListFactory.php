@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\to_do_list;
+namespace Database\Factories\ToDo;
 
-use App\Models\to_do_list\ToDoList;
+use App\Models\ToDo\ToDoList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ToDoListFactory extends Factory

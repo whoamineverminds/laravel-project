@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\to_do_list;
+namespace App\Models\ToDo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,17 +23,17 @@ class ToDoPlan extends Model
 
     protected static function booted()
     {
-        static::created(function ($user) {
-            if (!$user->complete) {
-                $foundList = $user->getList;
+        static::created(function (ToDoPlan $plan) {
+            if (!$plan->complete) {
+                $foundList = $plan->getList()->first();
                 ++$foundList->undone;
                 $foundList->save();
             }
         });
 
-        static::deleted(function ($user) {
-            if (!$user->complete) {
-                $foundList = $user->getList;
+        static::deleted(function (ToDoPlan $plan) {
+            if (!$plan->complete) {
+                $foundList = $plan->getList()->first();
                 --$foundList->undone;
                 $foundList->save();
             }

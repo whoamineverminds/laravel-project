@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\to_do_list;
+namespace App\Http\Controllers\ToDo;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\to_do_list\GetRequest;
-use App\Models\to_do_list\ToDoList;
-use App\Models\to_do_list\ToDoPlan;
-use App\Http\Requests\to_do_list\CreatePlanRequest;
-use App\Services\to_do_list\PlansService;
+use App\Http\Requests\ToDo\GetRequest;
+use App\Models\ToDo\ToDoList;
+use App\Models\ToDo\ToDoPlan;
+use App\Http\Requests\ToDo\CreatePlanRequest;
+use App\Services\ToDo\ToDoPlansService;
 
 class ToDoPlansController extends Controller
 {
     private $plansService;
 
-    public function __construct(PlansService $service)
+    public function __construct(ToDoPlansService $service)
     {
         $this->plansService = $service;
     }

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\to_do_list;
+namespace App\Http\Controllers\ToDo;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\to_do_list\CreateListRequest;
-use App\Http\Requests\to_do_list\FilterListsRequest;
-use App\Http\Requests\to_do_list\GetRequest;
-use App\Http\Requests\to_do_list\SortListsRequest;
-use App\Models\to_do_list\ToDoList;
-use App\Services\to_do_list\ListsService;
+use App\Http\Requests\ToDo\CreateListRequest;
+use App\Http\Requests\ToDo\FilterListsRequest;
+use App\Http\Requests\ToDo\GetRequest;
+use App\Http\Requests\ToDo\SortListsRequest;
+use App\Models\ToDo\ToDoList;
+use App\Services\ToDo\ToDoListsService;
 
 class ToDoListsController extends Controller
 {
     private $listsService;
 
-    public function __construct(ListsService $service)
+    public function __construct(ToDoListsService $service)
     {
         $this->listsService = $service;
     }

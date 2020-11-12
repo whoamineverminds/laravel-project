@@ -30,6 +30,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        /*Schema::table('to_do_lists', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });*/
         Schema::dropIfExists('users');
     }
 }
