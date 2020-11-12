@@ -18,7 +18,7 @@ class ToDoPlan extends Model
 
     public function getList()
     {
-        return $this->belongsTo('App\Models\to_do\ToDoList', 'list_id');
+        return $this->belongsTo('App\Models\ToDo\ToDoList', 'list_id');
     }
 
     protected static function booted()
