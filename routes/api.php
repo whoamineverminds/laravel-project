@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function() {
     });
 });
 
-Route::group(['prefix' => 'todo', 'middleware' => ['auth:sanctum', 'verified']], function() {
+Route::group(['prefix' => 'to_do', 'middleware' => ['auth:sanctum', 'verified']], function() {
     Route::group(['prefix' => 'lists'], function() {
         Route::post('/create', [ToDoListsController::class, 'create']);
         Route::delete('/delete/{list}', [ToDoListsController::class, 'delete']);
