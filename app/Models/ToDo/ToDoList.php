@@ -16,6 +16,6 @@ class ToDoList extends Model
 
     public function getPlans()
     {
-        return $this->hasMany('App\Models\to_do_list\ToDoPlan', 'list_id');
+        return $this->hasMany('App\Models\to_do\ToDoPlan', 'list_id');
     }
 }
